@@ -35,10 +35,17 @@
         	
             <div class="inner-bg">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" viewModel="@id('vm') @init('com.sai.espt.viewmodel.ActiveLogin')">
                         <div class="col-sm-8 col-sm-offset-2 text">
                         	<n:h1>eSPT PPH 21</n:h1>         <!--                  
                         	<image src="/images/sap-logo.png" width="30%" /> -->
+                        	<separator />
+					        User Login GA : <label value="@load(vm.lblActiveLoginGA)" /> Active
+					        <separator />
+					        User Login Broker : <label value="@load(vm.lblActiveLoginBrok)" /> Active
+					        <separator />
+					        Total User Login  : <label value="@load(vm.lblActiveLoginTot)" /> Active
+					        <separator />
                         </div>
                     </div>
                     <div class="row">

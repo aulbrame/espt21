@@ -321,6 +321,7 @@ public class AuthentificationVm {
 										Transaction transaction = session.beginTransaction();
 										try {
 											oDao.save(session, count, lhidlogin, mac.toUpperCase(), ip);
+											oDao.activeLogin(session, lhidlogin); //@nanda.bramestya
 											transaction.commit();
 										} catch (Exception e) {
 											e.printStackTrace();

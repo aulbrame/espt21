@@ -13,6 +13,8 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zul.Window;
 
 import com.sai.espt.dao.UserNpwpDAO;
+import com.sai.espt.domain.UserKacab;
+import com.sai.espt.domain.UserNpwp;
 import com.sai.utils.db.StoreHibernateUtil;
 
 public class HeaderVm {
@@ -35,11 +37,35 @@ public class HeaderVm {
 	@Command
 	public void doLogout() {	
 		int lhseqno = (int) zkSession.getAttribute("lhseqno");
+		
+		//@nanda.bramestya
+		UserKacab uklogin = null;
+		UserNpwp unlogin = null;
+		String user = "";
+		
+		if (zkSession.getAttribute("oUserKacab") != null) {
+			uklogin = (UserKacab) zkSession.getAttribute("oUserKacab"); 
+			user = "UserKacab";
+		}
+		if (zkSession.getAttribute("oUser") != null) {
+			unlogin = (UserNpwp) zkSession.getAttribute("oUser");
+			user = "UserNpwp";
+		}
+		//@nanda.bramestya
+		
 		System.out.println("ini lhseqno = "+ zkSession.getAttribute("lhseqno"));
 		Session session = StoreHibernateUtil.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			oDao.update(session, lhseqno);
+			
+			//@nanda.bramestya
+			if(user.equals("UserKacab"))
+				oDao.deActiveLogin(session, uklogin.getUklogin(),user); 
+			else if(user.equals("UserNpwp")) 
+				oDao.deActiveLogin(session, unlogin.getUnlogin(),user);
+			//@nanda.bramestya
+			
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -302,8 +302,8 @@ public class DownloadGAVm  {
 		} else {
 			listFilter = new SptAkhirDAO().listReport(filtTahun,iMonth,iType,objForm.getBroktp(),objForm.getBrologin());
 			for(Vbroker data: listFilter)
-				filter = "dhlogin = '"+ oUser.getUklogin() +"' AND dhtglpotong = '" + data.getTanggalpotong() 
-						+ "' AND dhtipe = '" + data.getIncometype() + "'";
+				filter = "dhlogin = '"+ objForm.getBrologin() +"' AND dhtglpotong = '" + data.getTanggalpotong() 
+				+ "' AND dhtipe = '" + data.getIncometype() + "'"; //@nanda.bramestya
 			if(filter==null){
 				System.out.println("masuk null");
 			}else{
@@ -323,8 +323,8 @@ public class DownloadGAVm  {
 						Transaction transaction = session.beginTransaction();
 						try {
 							for(Vbroker data: listFilter){
-								oDao.delete(session, oUser.getUklogin(), data.getTanggalpotong(), data.getIncometype());					
-								oDao.save(session, oUser.getUklogin(), data.getTanggalpotong(), data.getIncometype());				
+								oDao.delete(session, objForm.getBrologin(), data.getTanggalpotong(), data.getIncometype());	//@nanda.bramestya				
+								oDao.save(session, objForm.getBrologin(), data.getTanggalpotong(), data.getIncometype()); //@nanda.bramestya				
 							}
 							transaction.commit();
 						} catch (Exception e) {

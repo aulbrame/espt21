@@ -164,6 +164,40 @@ public class UserNpwpDAO {
 	public void saveOrUpdateGA(Session sessionLoc, UserKacab oForm) throws HibernateException, Exception {
 		sessionLoc.saveOrUpdate(oForm);
 	}
+	
+	//@nanda.bramestya
+	public void activeLogin(Session session, String lhidlogin) throws HibernateException, Exception {
+		Query query = session.createSQLQuery("UPDATE UserKacab set isactive='Y' where uklogin = '"+lhidlogin+"'");
+		//query.setParameter("uklogin", lhidlogin);
+		query.executeUpdate();
+	}
+		
+	public void deActiveLogin(Session session, String lhidlogin, String user) throws HibernateException, Exception {
+		Query query = session.createSQLQuery("UPDATE "+user+" set isactive='N' where uklogin = '"+lhidlogin+"'");
+		//query.setParameter("uklogin", lhidlogin);
+		query.executeUpdate();
+	}
+		
+	public int countActiveUserGA() {
+		session = StoreHibernateUtil.openSession();
+		int count = 0;
+		count = Integer.parseInt((String) session.createSQLQuery(
+	       			"select count(*) " +
+	       			"from dbo.UserKacab (nolock) where isactive='Y'").uniqueResult().toString());
+		session.close();
+		return count;	
+	}
+		
+	public int countActiveUserBrok() {
+		session = StoreHibernateUtil.openSession();
+		int count = 0;
+		count = Integer.parseInt((String) session.createSQLQuery(
+	       			"select count(*) " +
+	       			"from dbo.UserNpwp (nolock) where isactive='Y'").uniqueResult().toString());
+		session.close();
+		return count;	
+	}
+	//@nanda.bramestya
 
 }
 
