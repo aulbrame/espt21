@@ -5,9 +5,9 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://172.24.0.16:1433;databaseName=ESPT</property>
-		<property name="hibernate.connection.username">sa</property>
-		<property name="connection.password">masterkey</property>  		
+		<property name="hibernate.connection.url">jdbc:sqlserver://172.24.0.6:1433;databaseName=ESPT</property>
+		<property name="hibernate.connection.username">espt21</property>
+		<property name="connection.password">espt21</property>  		
 		
 		<property name="hibernate.jdbc.batch_size">20</property> 
 		<property name="hibernate.cache.use_second_level_cache">false</property>
